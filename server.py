@@ -33,6 +33,7 @@ async def handle_client(reader, writer):
 
 
 async def main():
+    server = None
     try:
         print("Starting server...")
         server = await asyncio.start_server(handle_client, SERVER_HOST, SERVER_PORT)
@@ -41,6 +42,11 @@ async def main():
             await server.serve_forever()
     except KeyboardInterrupt:
         print("Shutting down server...")
+    finally:
+        if server:
+            server.close()
+            await server.wait_closed()
+            print("Server shut down successfully")
 
 
 if __name__ == '__main__':

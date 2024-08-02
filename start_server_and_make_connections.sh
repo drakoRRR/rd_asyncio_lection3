@@ -18,6 +18,6 @@ do
     kill $PID
 done
 
-sleep 2
+sleep 10
 kill $SERVER_PID
 
